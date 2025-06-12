@@ -1,3 +1,4 @@
+Gunicorn
 bcrypt==4.3.0
 Flask==3.1.0
 Flask-Bcrypt==1.0.1
