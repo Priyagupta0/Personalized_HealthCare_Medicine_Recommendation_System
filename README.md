@@ -5,7 +5,8 @@ An AI-powered healthcare assistant that allows users to input symptoms and recei
 🔐 Features user **login and signup** functionality for secure access, built using **Flask**, and stores data using **Flask-SQLAlchemy**.
 
 ---
-
+## 🚀 Live Demo : https://personalized-healthcare-medicine.onrender.com
+---
 ## 🚀 Key Features
 
 ✅ **User Authentication**  
@@ -48,6 +49,8 @@ An AI-powered healthcare assistant that allows users to input symptoms and recei
 - matplotlib
 - seaborn
 
+**Hosting:**
+- Render
 ---
 
 ## 📦 Requirements
@@ -55,7 +58,7 @@ An AI-powered healthcare assistant that allows users to input symptoms and recei
 Create a `requirements.txt` with the following content:
 
 ```
-
+Gunicorn
 bcrypt==4.3.0
 Flask==3.1.0
 Flask-Bcrypt==1.0.1
