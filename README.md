@@ -4,8 +4,8 @@ An AI-powered healthcare assistant that allows users to input symptoms and recei
 
 🔐 Features user **login and signup** functionality for secure access, built using **Flask**, and stores data using **Flask-SQLAlchemy**.
 
----
-## 🚀 Live Demo : https://personalized-healthcare-medicine.onrender.com
+🚀 **Live Demo** :  [Demo](https://my-personalized-healthcare-medicine.onrender.com)
+
 ---
 ## 🚀 Key Features
 
