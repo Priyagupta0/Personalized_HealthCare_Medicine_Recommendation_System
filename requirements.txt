@@ -1,0 +1,11 @@
+Gunicorn
+Flask
+Flask-Bcrypt
+Flask-SQLAlchemy
+bcrypt
+matplotlib
+numpy
+pandas
+scikit-learn
+seaborn
+SQLAlchemy
