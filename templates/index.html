@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Health Care Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: rgb(192, 178, 178);
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .myimg {
+            width: 40px;
+            height: 40px;
+            border: 2px solid black;
+            border-radius: 50%;
+            margin: 5px;
+            flex-shrink: 0;
+        }
+        
+        h1 {         
+            background-color: rgb(16, 231, 231);
+            text-align: center;
+            font-weight: bolder;
+            margin: 20px 10px 0;
+            padding: 15px 10px;
+            font-size: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        /* Navigation */
+        .Nav_Bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: black;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 5px 10px;
+            white-space: nowrap;
+        }
+        
+        .nav-link:hover {
+            text-decoration: underline;
+            color: cyan;
+        }
+        
+        .log {
+            margin-left: auto;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            padding: 0 10px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        
+        /* Modal Buttons */
+        .result-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 10px;
+        }
+        
+        .toggle-button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        /* Modal Content */
+        .modal-content {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background-color: #020606;
+            color: white;
+            padding: 10px 20px;
+            height: auto;
+        }
+        
+        .modal-body {
+            padding: 20px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hamburger {
+                display: block;
+                order: 1;
+            }
+            
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .log {
+                margin-left: 0;
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+            }
+            
+            .myimg {
+                order: -1;
+            }
+            
+            .toggle-button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.3rem;
+                padding: 10px 5px;
+            }
+            
+            .modal-dialog {
+                margin: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .Nav_Bar {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.1rem;
+                margin: 10px 5px 0;
+            }
+            
+            .form-control {
+                padding: 10px;
+            }
+            
+            .toggle-button {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+  <div class="Nav_Bar">
+    <img class="myimg" src="/static/heal.jpg" alt="Logo">
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="/about">About</a>
+        <a class="nav-link" href="/developer">Developer</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/contact">Contact Us</a>
+        <div class="log">
+            <button class="btn btn-light"><a href="/logout" style="color: black; text-decoration: none;">Logout</a></button>
+        </div>
+    </div>
+  </div>
+  <h1>Personalized Medicine and HealthCare Recommendation System !!</h1>
+  <div style="background: black; color: white; border-radius: 15px; padding: 20px; margin: 20px 10px; max-width: 1200px; margin-left: auto; margin-right: auto;">
+    <form action="/predict" method="post">
+        <div class="form-group">
+            <label for="symptoms" id="label1">Select Symptoms:</label><br>
+            <input type="text" class="form-control", id="symptoms" name="symptoms" placeholder="Type symptoms such as itching,high_fever,skin_rash complete to get AI result...">
+        </div>
+
+        <!-- Display the transcribed text here -->
+        <div name="mysysms" id="transcription"></div>
+
+        {% if message %}
+        <p>{{ message }}</p>
+        {% endif %}
+        <br>
+
+        <button type="submit" class="btn btn-danger btn-lg" style="width: 100%; padding: 14px; margin-bottom: 5px;">Predict and Recommend</button>
+    </form>
+</div>
+
+
+{% if predicted_disease %}
+
+<!-- Results -->
+<h1 class="text-center my-4 mt-4">Our AI System Results</h1>
+<div class="container">
+
+    <div class="result-container">
+        <!-- Buttons to toggle display -->
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#diseaseModal" style="padding:4px;  margin: 5px 40px 5px 0; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#F39334;color:black;">Disease</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#descriptionModal" style="padding:4px; margin: 5px 40px 5px 0; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#268AF3 ;color:black;">Description</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#precautionModal" style="padding:4px; margin: 5px 40px 5px 0; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#F371F9 ;color:black;">Precaution</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#medicationsModal" style="padding:4px; margin: 5px 40px 5px 0; font-size:20px;font-weight:bold; width:140px;border-radius:5px; background:#F8576F ;color:black;">Medications</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#workoutsModal" style="padding:4px; margin: 5px 40px 5px 0; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#99F741 ;color:black;">Workouts</button>
+        <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#dietsModal" style="padding:4px; margin: 5px 40px 5px 0; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#E5E23D;color:black;">Diets</button>
+    </div>
+</div>
+
+{% endif %}
+
+<!-- Disease Modal -->
+    <div class="modal fade" id="diseaseModal" tabindex="-1" aria-labelledby="diseaseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #020606; color:white; height:30px; text-align: center; font-size:larger;"> <!-- Set header background color inline -->
+                    <h5 class="modal-title" id="diseaseModalLabel">Predicted Disease</h5>
+                </div>
+                <div class="modal-body;"> <!-- Set modal body background color inline -->
+                    <p>{{ predicted_disease }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Description Modal -->
+    <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #020606; color:white; height:30px; text-align: center; font-size:larger;">
+                    <h5 class="modal-title" id="descriptionModalLabel">Description</h5>
+                </div>
+                <div class="modal-body">
+                    <p>{{ dis_des }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Precaution Modal -->
+    <div class="modal fade" id="precautionModal" tabindex="-1" aria-labelledby="precautionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #020606; color:white; height:30px; text-align: center; font-size:larger;">
+                    <h5 class="modal-title" id="precautionModalLabel">Precaution</h5>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        {% for i in my_precautions %}
+                            <li>{{ i }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Medications Modal -->
+    <div class="modal fade" id="medicationsModal" tabindex="-1" aria-labelledby="medicationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #020606; color:white; height:30px; text-align: center; font-size:larger;">
+                    <h5 class="modal-title" id="medicationsModalLabel">Medications</h5>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        {% for i in medications %}
+                            <li>{{ i }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Workouts Modal -->
+    <div class="modal fade" id="workoutsModal" tabindex="-1" aria-labelledby="workoutsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #020606; color:white; height:30px; text-align: center; font-size:larger;">
+                    <h5 class="modal-title" id="workoutsModalLabel">Workouts</h5>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        {% for i in workout %}
+                            <li>{{ i }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diets Modal -->
+    <div class="modal fade" id="dietsModal" tabindex="-1" aria-labelledby="dietsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #020606; color:white; height:30px; text-align: center; font-size:larger;">
+                    <h5 class="modal-title" id="dietsModalLabel">Diets</h5>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        {% for i in my_diet %}
+                            <li>{{ i }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            if (!event.target.closest('.Nav_Bar') && window.innerWidth <= 992) {
+                navLinks.classList.remove('active');
+            }
+        });
+        
+        // Close menu when a nav link is clicked on mobile
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 992) {
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
